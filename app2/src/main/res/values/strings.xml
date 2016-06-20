@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">OptusSampleTest2</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="car">Car - %1$s</string>
+    <string name="train">Train - %1$s</string>
+    <string name="mode">Mode of Transport</string>
+    <string name="navigate">NAVIGATE</string>
+    <string name="loading">Loading data... Please wait</string>
+</resources>

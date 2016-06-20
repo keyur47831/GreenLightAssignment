@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout >
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="au.com.optus.optusUISample.model.HomeActivityViewModel"/>
+    </data>
+
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".ui.activity.HomeActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:id="@+id/nestedScroll"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_height="wrap_content"
+        >
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/item_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="horizontal"/>
+        <au.com.optus.optusUISample.ui.view.WrapContentHeightViewPager
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="4dp"
+            android:id="@+id/itemViewPager"
+            android:layout_below="@+id/item_list"
+            />
+        <LinearLayout
+            android:id="@+id/viewPagerCountDots"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/itemViewPager"
+            android:gravity="center"
+            android:orientation="horizontal" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_below="@+id/viewPagerCountDots"
+            android:id="@+id/txtLayout"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="@string/txtV1"
+                style="@style/textItem"
+                android:id="@+id/txtV1"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="@string/txtV2"
+                android:layout_below="@+id/txtV1"
+                android:id="@+id/txtV2"
+                android:layout_centerInParent="true"
+                style="@style/textItem"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="@string/txtV3"
+                android:layout_below="@+id/txtV2"
+                style="@style/textItem"
+                android:layout_alignParentEnd="true"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:gravity="center_horizontal"
+            android:id="@+id/txtListItemLabel"
+            android:text="@{viewModel.topItemLabel}"
+            style="@style/textItem"
+            android:layout_below="@+id/txtLayout"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_below="@+id/txtListItemLabel"
+            android:id="@+id/layout_button"
+            android:background="@{viewModel.backGroundColor}"
+            android:weightSum="9"
+            android:gravity="center"
+            android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content">
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:id="@+id/redBtn"
+                android:onClick="onClick"
+                android:text="RED"
+                android:layout_height="wrap_content" />
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:id="@+id/blueBtn"
+                android:text="BLUE"
+                android:onClick="onClick"
+                android:layout_height="wrap_content" />
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:id="@+id/greenBtn"
+                android:onClick="onClick"
+                android:text="GREEN"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </RelativeLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>
+    </layout>
