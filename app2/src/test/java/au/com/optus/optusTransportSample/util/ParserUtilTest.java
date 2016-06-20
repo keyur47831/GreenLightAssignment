@@ -1,7 +1,5 @@
 package au.com.optus.optusTransportSample.util;
 
-import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.Test;
@@ -10,12 +8,10 @@ import org.junit.runner.RunWith;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.logging.Logger;
 
-import au.com.optus.OptusTransportTestRunner;
+import au.com.optus.optusTransportSample.OptusTransportTestRunner;
 import au.com.optus.optusTransportSample.model.FromCentralModel;
 import au.com.optus.optusTransportSample.model.LocationModel;
-import au.com.optus.optusTransportSample.model.TransportDataModel;
 import au.com.optus.optusTransportSample.model.TransportMasterModel;
 
 import static org.junit.Assert.*;
@@ -60,8 +56,7 @@ public class ParserUtilTest {
         JSONObject jsonObject=new JSONObject(jsonStr);
         FromCentralModel fromCentralModel=ParserUtil.parseFromCentralModel(jsonObject);
         assertNotNull(fromCentralModel);
-        assertFalse(fromCentralModel.getCar().isEmpty());
-        assertFalse(fromCentralModel.getTrain().isEmpty());
+
 
     }
 

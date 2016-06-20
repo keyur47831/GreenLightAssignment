@@ -5,7 +5,7 @@ import org.junit.runner.RunWith;
 
 import java.util.ArrayList;
 
-import au.com.optus.OptusTransportTestRunner;
+import au.com.optus.optusTransportSample.OptusTransportTestRunner;
 import au.com.optus.optusTransportSample.model.TransportDataModel;
 
 import static org.junit.Assert.assertEquals;

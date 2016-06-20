@@ -4,7 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Created by k on 6/19/2016.
+ * Created by k
  */
 public class GenericParcelable<T> implements Parcelable {
 

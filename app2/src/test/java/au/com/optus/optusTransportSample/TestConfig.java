@@ -1,4 +1,4 @@
-package au.com.optus;
+package au.com.optus.optusTransportSample;
 
 import android.os.Build;
 

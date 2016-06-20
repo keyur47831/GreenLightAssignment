@@ -19,6 +19,7 @@ import au.com.optus.optusTransportSample.model.TransportDataModel;
 import au.com.optus.optusTransportSample.model.TransportMasterModel;
 import au.com.optus.optusTransportSample.ui.view.MVPview;
 import au.com.optus.optusTransportSample.util.Constants;
+import au.com.optus.optusTransportSample.util.GenericParcelable;
 
 /**
  * Created by k
@@ -140,13 +141,14 @@ public class MainPresenter extends Presenter<MVPview> {
 
     @Override
     public void onSaveInstanceState (Bundle outState) {
-        outState.putParcelable (Constants.SPINNER_DATA, mainActivityViewModel);
+        outState.putParcelable (Constants.SPINNER_DATA, new GenericParcelable<> (mainActivityViewModel));
     }
 
     @Override
     public void onRestoreInstanceState (Bundle savedInstanceState) {
         if (savedInstanceState != null) {
-            mainActivityViewModel = savedInstanceState.getParcelable (Constants.SPINNER_DATA);
+            GenericParcelable<MainActivityViewModel>data=savedInstanceState.getParcelable (Constants.SPINNER_DATA);
+            mainActivityViewModel = data.getValue ();
         }
 
     }
