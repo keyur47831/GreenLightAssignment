@@ -18,7 +18,7 @@ import au.com.optus.optusTransportSample.ui.presenter.MainPresenter;
 import au.com.optus.optusTransportSample.ui.view.MVPview;
 
 
-public class MainActivity extends PresentableActivity<MainPresenter> implements View.OnClickListener, MVPview {
+public class MainActivity extends PresentableActivity<MainPresenter> implements MVPview {
     private ProgressDialog progressDialog;
     private ActivityMainBinding binding;
     private Spinner spinner;
@@ -30,7 +30,7 @@ public class MainActivity extends PresentableActivity<MainPresenter> implements 
         super.onCreate (savedInstanceState);
         binding = DataBindingUtil.setContentView (this, R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setSupportActionBar(binding.toolbar);
         progressDialog = getPresenter ().prepareProgressDialog ();
 
     }
@@ -61,37 +61,15 @@ public class MainActivity extends PresentableActivity<MainPresenter> implements 
         Toast.makeText (this, msg, Toast.LENGTH_LONG).show ();
     }
 
-
-    @Override
-    public void onClick (View view) {
-        super.onClick (view);
-        getPresenter ().onClick (view);
-    }
-
     @Override
     public void bindData (Object obj) {
         mainActivityViewModel = (MainActivityViewModel) obj;
-        spinner = (Spinner) findViewById (R.id.spinnerLocation);
-
+        spinner = binding.spinnerLocation;
         binding.setViewModel (mainActivityViewModel);
         LocationSpinnerAdapter adapter = new LocationSpinnerAdapter (mainActivityViewModel.getTransportMasterModel ().getTransportDataModelList ());
         spinner.setAdapter (adapter);
-        //clear the old handler
-        spinner.setOnItemSelectedListener (null);
         spinner.setSelection (mainActivityViewModel.getCurrentPosition ());
-        spinner.setOnItemSelectedListener (new AdapterView.OnItemSelectedListener () {
-            @Override
-            public void onItemSelected (AdapterView<?> adapterView, View view, int i, long l) {
-
-                getPresenter ().SpinnerClickHandler (i);
-
-            }
-
-            @Override
-            public void onNothingSelected (AdapterView<?> adapterView) {
-
-            }
-        });
+        spinner.setOnItemSelectedListener (getPresenter ());
 
     }
 

@@ -26,6 +26,7 @@ public class MainActivityViewModel extends BaseObservable implements Serializabl
     @Bindable
     public void setCarData (String carData) {
         this.carData = carData;
+        notifyChange ();
     }
 
     public String getTrainData () {
@@ -35,6 +36,7 @@ public class MainActivityViewModel extends BaseObservable implements Serializabl
     @Bindable
     public void setTrainData (String trainData) {
         this.trainData = trainData;
+        notifyChange ();
     }
 
     public TransportMasterModel getTransportMasterModel () {
@@ -52,6 +54,7 @@ public class MainActivityViewModel extends BaseObservable implements Serializabl
     @Bindable
     public void setCurrentSelectedID (int currentSelectedID) {
         this.currentSelectedID = currentSelectedID;
+        notifyChange ();
     }
 
     public int getCurrentPosition () {
@@ -60,7 +63,9 @@ public class MainActivityViewModel extends BaseObservable implements Serializabl
 
     @Bindable
     public void setCurrentPosition (int currentPosition) {
+
         this.currentPosition = currentPosition;
+        notifyChange ();
     }
 
 

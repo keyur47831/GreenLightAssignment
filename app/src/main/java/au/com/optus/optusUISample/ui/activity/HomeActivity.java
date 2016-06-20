@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import au.com.optus.optusUISample.R;
 
+
 import au.com.optus.optusUISample.databinding.ActivityHomeBinding;
 import au.com.optus.optusUISample.model.HomeActivityViewModel;
 import au.com.optus.optusUISample.ui.presenter.HomePresenter;
@@ -24,7 +25,7 @@ import au.com.optus.optusUISample.ui.view.WrapContentHeightViewPager;
 import au.com.optus.optusUISample.utils.Constants;
 
 
-public class HomeActivity extends PresentableActivity<HomePresenter> implements View.OnClickListener, MVPview, ViewPager.OnPageChangeListener {
+public class HomeActivity extends PresentableActivity<HomePresenter> implements MVPview ,View.OnClickListener{
 
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
@@ -46,13 +47,13 @@ public class HomeActivity extends PresentableActivity<HomePresenter> implements 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
-        recyclerView = (RecyclerView) findViewById(R.id.item_list);
+        recyclerView = binding.itemList;
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        wrapContentHeightViewPager = (WrapContentHeightViewPager) findViewById(R.id.itemViewPager);
-        wrapContentHeightViewPager.addOnPageChangeListener(this);
-        indicatorLayout = (LinearLayout) findViewById(R.id.viewPagerCountDots);
+        setSupportActionBar(binding.toolbar);
+
+        wrapContentHeightViewPager =binding.itemViewPager;
+        wrapContentHeightViewPager.addOnPageChangeListener(getPresenter ());
+        indicatorLayout = binding.viewPagerCountDots;
 
     }
 
@@ -71,8 +72,10 @@ public class HomeActivity extends PresentableActivity<HomePresenter> implements 
         super.onResume();
         if (recyclerViewdata != null) {
             layoutManager.onRestoreInstanceState(recyclerViewdata);
-            wrapContentHeightViewPager.onRestoreInstanceState(viewPagerData);
+
         }
+        if(viewPagerData!=null)
+            wrapContentHeightViewPager.onRestoreInstanceState(viewPagerData);
     }
 
     @Override
@@ -99,48 +102,28 @@ public class HomeActivity extends PresentableActivity<HomePresenter> implements 
 
     @Override
     public void updateView(Object data) {
-        String uiEvent = data.toString();
-        if (uiEvent.equalsIgnoreCase(Constants.PAGE_INDICATOR))
-            updateDotIndicator();
-    }
-
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-    }
-
-    @Override
-    public void onPageSelected(int position) {
-        getPresenter().updateIndicator(position);
+        HomeActivityViewModel presenterData=(HomeActivityViewModel) data;
+        homeActivityViewModel.setBackGroundColor (presenterData.getBackGroundColor ());
+        homeActivityViewModel.setTopItemLabel (presenterData.getTopItemLabel ());
+        homeActivityViewModel.setLinearLayout (presenterData.getLinearLayout ());
+        updateDotIndicator();
     }
 
 
-    @Override
-    public void onPageScrollStateChanged(int state) {
-
-
-    }
-
-    @Override
-    public void onClick(View view) {
-        super.onClick(view);
-        getPresenter().onClick(view);
-    }
 
     public void onSaveInstanceState(Bundle outState) {
         recyclerViewdata = layoutManager.onSaveInstanceState();
         outState.putParcelable(Constants.RECYLER_DATA, recyclerViewdata);
         viewPagerData = wrapContentHeightViewPager.onSaveInstanceState();
         outState.putParcelable(Constants.VIEW_PAGER_DATA, viewPagerData);
-        getPresenter().onSaveInstanceState(outState);
+        getPresenter ().onSaveInstanceState (outState);
     }
 
     public void onRestoreInstanceState(Bundle inState) {
         if (inState != null) {
             recyclerViewdata = inState.getParcelable(Constants.RECYLER_DATA);
             viewPagerData = inState.getParcelable(Constants.VIEW_PAGER_DATA);
-            getPresenter().onRestoreInstanceState(inState);
-
+            getPresenter ().onRestoreInstanceState (inState);
 
         }
     }

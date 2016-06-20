@@ -74,8 +74,10 @@ abstract class PresentableActivity<T extends Presenter> extends AppCompatActivit
 
     @Override
     protected void onDestroy() {
-        presenter.onDestroy();
-        presenter = null;
+        if(!isChangingConfigurations ()) {
+            presenter.onDestroy ();
+            presenter = null;
+        }
         super.onDestroy();
     }
 

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 import android.view.View;
+import android.widget.AdapterView;
 
 import java.util.Locale;
 
@@ -24,7 +25,7 @@ import au.com.optus.optusTransportSample.util.GenericParcelable;
 /**
  * Created by k
  */
-public class MainPresenter extends Presenter<MVPview> {
+public class MainPresenter extends Presenter<MVPview> implements AdapterView.OnItemSelectedListener{
 
     @VisibleForTesting
     DataManager dataManager = OptusTransportSampleApp.getInstance ().getDataManager ();
@@ -150,6 +151,17 @@ public class MainPresenter extends Presenter<MVPview> {
             GenericParcelable<MainActivityViewModel>data=savedInstanceState.getParcelable (Constants.SPINNER_DATA);
             mainActivityViewModel = data.getValue ();
         }
+
+    }
+    @Override
+    public void onItemSelected (AdapterView<?> adapterView, View view, int i, long l) {
+
+        SpinnerClickHandler (i);
+
+    }
+
+    @Override
+    public void onNothingSelected (AdapterView<?> adapterView) {
 
     }
 

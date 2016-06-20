@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -19,7 +20,7 @@ import au.com.optus.optusUISample.utils.Constants;
 /**
  * Created by k
  */
-public class HomePresenter extends Presenter<MVPview> {
+public class HomePresenter extends Presenter<MVPview> implements View.OnClickListener, ViewPager.OnPageChangeListener {
     private String[] data = {"Item 1", "Item 2", "Item 3", "Item 4", "Item 5"};
     private ImageView[] dots;
     private int dotCount;
@@ -30,6 +31,7 @@ public class HomePresenter extends Presenter<MVPview> {
         super (view);
     }
 
+    @Override
     public void onStart () {
 
         homeActivityViewModel = new HomeActivityViewModel ();
@@ -39,10 +41,13 @@ public class HomePresenter extends Presenter<MVPview> {
         dots = new ImageView[dotCount];
         getView ().bindData (homeActivityViewModel);
         updateIndicator (0);
-
     }
-
-
+    @Override
+    public void onResume()
+    {
+        if(homeActivityViewModel!=null)
+            getView ().updateView (homeActivityViewModel);
+    }
     public void updateIndicator (int position) {
         LinearLayout linearLayout = new LinearLayout (getContext ());
         for (int i = 0; i < dotCount; i++) {
@@ -60,7 +65,8 @@ public class HomePresenter extends Presenter<MVPview> {
         }
         dots[position].setImageDrawable (ContextCompat.getDrawable (getContext (), R.drawable.selecteditem_dot));
         homeActivityViewModel.setLinearLayout (linearLayout);
-        getView ().updateView (Constants.PAGE_INDICATOR);
+        // getView ().bindData (homeActivityViewModel);
+        getView ().updateView (homeActivityViewModel);
     }
 
     private OnInteractionListener viewPageInteractionListener = new OnInteractionListener () {
@@ -77,8 +83,26 @@ public class HomePresenter extends Presenter<MVPview> {
             homeActivityViewModel.setTopItemLabel (data.toString ());
         }
     };
+    @Override
+    public void onPageScrolled (int position, float positionOffset, int positionOffsetPixels) {
 
-    public void onClick (final View view) {
+    }
+
+    @Override
+    public void onPageSelected (int position) {
+        updateIndicator (position);
+    }
+
+
+    @Override
+    public void onPageScrollStateChanged (int state) {
+
+
+    }
+
+    @Override
+    public void onClick (View view) {
+        super.onClick (view);
         switch (view.getId ()) {
             case R.id.blueBtn:
                 homeActivityViewModel.setBackGroundColor (Color.BLUE);
@@ -89,24 +113,18 @@ public class HomePresenter extends Presenter<MVPview> {
             case R.id.redBtn:
                 homeActivityViewModel.setBackGroundColor (Color.RED);
                 break;
-
-
         }
     }
-
-    public void onSaveInstanceState (Bundle outState) {
-        if (homeActivityViewModel.getTopItemLabel () != null)
-            outState.putString (Constants.TITLE, homeActivityViewModel.getTopItemLabel ());
-        if (homeActivityViewModel.getBackGroundColor () != -1)
-            outState.putInt (Constants.COLOR, homeActivityViewModel.getBackGroundColor ());
+    public void onSaveInstanceState(Bundle outState) {
+       outState.putString (Constants.TITLE,homeActivityViewModel.getTopItemLabel ());
+        outState.putInt (Constants.COLOR,homeActivityViewModel.getBackGroundColor ());
     }
 
-    public void onRestoreInstanceState (Bundle inState) {
-        if (inState != null && homeActivityViewModel != null) {
+    public void onRestoreInstanceState(Bundle inState) {
+        if (inState != null) {
             homeActivityViewModel.setBackGroundColor (inState.getInt (Constants.COLOR));
             homeActivityViewModel.setTopItemLabel (inState.getString (Constants.TITLE));
         }
-
     }
 
 
