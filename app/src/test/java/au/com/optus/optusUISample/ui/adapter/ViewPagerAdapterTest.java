@@ -8,18 +8,13 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import au.com.optus.optusUISample.BuildConfig;
 import au.com.optus.optusUISample.ui.activity.HomeActivity;
-import au.com.optus.optusUISample.ui.fragment.ViewPagerFragment;
 import au.com.optus.optusUISample.ui.view.OnInteractionListener;
 import au.com.optus.optusUISample.utils.Constants;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.mock;
 
 /**
  * Created by keyur on 06/21/16.

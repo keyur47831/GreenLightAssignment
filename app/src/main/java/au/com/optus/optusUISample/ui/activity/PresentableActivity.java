@@ -17,85 +17,85 @@ abstract class PresentableActivity<T extends Presenter> extends AppCompatActivit
 
 
     @NonNull
-    protected abstract T createPresenter();
+    protected abstract T createPresenter ();
 
     @NonNull
-    protected T getPresenter() {
+    protected T getPresenter () {
         return presenter;
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        presenter = createPresenter();
+    protected void onCreate (Bundle savedInstanceState) {
+        super.onCreate (savedInstanceState);
+        presenter = createPresenter ();
         if (presenter == null) {
-            throw new IllegalStateException("mPresenter == null");
+            throw new IllegalStateException ("mPresenter == null");
         }
 
-        presenter.onCreate(savedInstanceState);
+        presenter.onCreate (savedInstanceState);
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+    protected void onSaveInstanceState (Bundle outState) {
+        super.onSaveInstanceState (outState);
         //  presenter.onSaveInstanceState(outState);
     }
 
     @Override
-    public void onRestoreInstanceState(Bundle savedInstanceState) {
+    public void onRestoreInstanceState (Bundle savedInstanceState) {
         // Always call the superclass so it can restore the view hierarchy
-        super.onRestoreInstanceState(savedInstanceState);
+        super.onRestoreInstanceState (savedInstanceState);
         // presenter.onRestoreInstanceState(savedInstanceState);
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        presenter.onStart();
+    protected void onStart () {
+        super.onStart ();
+        presenter.onStart ();
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        presenter.onResume();
+    protected void onResume () {
+        super.onResume ();
+        presenter.onResume ();
     }
 
     @Override
-    protected void onPause() {
-        presenter.onPause();
-        super.onPause();
+    protected void onPause () {
+        presenter.onPause ();
+        super.onPause ();
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
-        presenter.onStop();
+    protected void onStop () {
+        super.onStop ();
+        presenter.onStop ();
     }
 
     @Override
-    protected void onDestroy() {
-        if(!isChangingConfigurations ()) {
+    protected void onDestroy () {
+        if (!isChangingConfigurations ()) {
             presenter.onDestroy ();
             presenter = null;
         }
-        super.onDestroy();
+        super.onDestroy ();
     }
 
     @Override
-    public void onBackPressed() {
-        presenter.onBackPressed();
-        super.onBackPressed();
+    public void onBackPressed () {
+        presenter.onBackPressed ();
+        super.onBackPressed ();
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        presenter.onOptionsItemSelected(item);
-        return super.onOptionsItemSelected(item);
+    public boolean onOptionsItemSelected (MenuItem item) {
+        presenter.onOptionsItemSelected (item);
+        return super.onOptionsItemSelected (item);
     }
 
     @Override
-    public void onClick(View view) {
-        presenter.onClick(view);
+    public void onClick (View view) {
+        presenter.onClick (view);
     }
 
 }

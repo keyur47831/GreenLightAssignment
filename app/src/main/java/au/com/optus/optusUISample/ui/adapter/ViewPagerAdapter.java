@@ -18,20 +18,20 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
 
     @Override
-    public Fragment getItem(int pos) {
+    public Fragment getItem (int pos) {
 
-        ViewPagerFragment viewPagerFragment = ViewPagerFragment.newInstance(String.format(Locale.ENGLISH, Constants.FRAGMENT, pos + 1));
-        viewPagerFragment.setCallback(onInteractionListener);
+        ViewPagerFragment viewPagerFragment = ViewPagerFragment.newInstance (String.format (Locale.ENGLISH, Constants.FRAGMENT, pos + 1));
+        viewPagerFragment.setCallback (onInteractionListener);
         return viewPagerFragment;
     }
 
     @Override
-    public int getCount() {
+    public int getCount () {
         return Constants.MAX_FRAGMENTS;
     }
 
-    public ViewPagerAdapter(FragmentManager fm, OnInteractionListener interactionListener) {
-        super(fm);
+    public ViewPagerAdapter (FragmentManager fm, OnInteractionListener interactionListener) {
+        super (fm);
         onInteractionListener = interactionListener;
     }
 }

@@ -42,12 +42,13 @@ public class HomePresenter extends Presenter<MVPview> implements View.OnClickLis
         getView ().bindData (homeActivityViewModel);
         updateIndicator (0);
     }
+
     @Override
-    public void onResume()
-    {
-        if(homeActivityViewModel!=null)
+    public void onResume () {
+        if (homeActivityViewModel != null)
             getView ().updateView (homeActivityViewModel);
     }
+
     public void updateIndicator (int position) {
         LinearLayout linearLayout = new LinearLayout (getContext ());
         for (int i = 0; i < dotCount; i++) {
@@ -83,6 +84,7 @@ public class HomePresenter extends Presenter<MVPview> implements View.OnClickLis
             homeActivityViewModel.setTopItemLabel (data.toString ());
         }
     };
+
     @Override
     public void onPageScrolled (int position, float positionOffset, int positionOffsetPixels) {
 
@@ -115,12 +117,13 @@ public class HomePresenter extends Presenter<MVPview> implements View.OnClickLis
                 break;
         }
     }
-    public void onSaveInstanceState(Bundle outState) {
-       outState.putString (Constants.TITLE,homeActivityViewModel.getTopItemLabel ());
-        outState.putInt (Constants.COLOR,homeActivityViewModel.getBackGroundColor ());
+
+    public void onSaveInstanceState (Bundle outState) {
+        outState.putString (Constants.TITLE, homeActivityViewModel.getTopItemLabel ());
+        outState.putInt (Constants.COLOR, homeActivityViewModel.getBackGroundColor ());
     }
 
-    public void onRestoreInstanceState(Bundle inState) {
+    public void onRestoreInstanceState (Bundle inState) {
         if (inState != null) {
             homeActivityViewModel.setBackGroundColor (inState.getInt (Constants.COLOR));
             homeActivityViewModel.setTopItemLabel (inState.getString (Constants.TITLE));

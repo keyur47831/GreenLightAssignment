@@ -20,10 +20,9 @@ import au.com.optus.optusUISample.ui.view.OnInteractionListener;
  * create an instance of this fragment.
  */
 public class ViewPagerFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "param1";
-    // TODO: Rename and change types of parameters
+
     private String mParam1;
 
 
@@ -40,7 +39,7 @@ public class ViewPagerFragment extends Fragment {
      * @param param1 Parameter 1.
      * @return A new instance of fragment FirstFragment.
      */
-    // TODO: Rename and change types and number of parameters
+
     public static ViewPagerFragment newInstance (String param1) {
         ViewPagerFragment fragment = new ViewPagerFragment ();
         Bundle args = new Bundle ();
